@@ -1,0 +1,52 @@
+<div class="container my-4">
+  <button class="btn btn-link mb-3" (click)="goBack()">← Volver</button>
+
+  @if (loading) {
+    <div class="alert alert-info">Cargando...</div>
+  }
+
+  @if (!loading && crew) {
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="card-title text-primary">{{ crew.name }}</h2>
+        <p class="card-text">{{ crew.description }}</p>
+        <p><strong>Estado:</strong> {{ crew.status }}</p>
+        <p><strong>Número de miembros:</strong> {{ crew.number }}</p>
+        <p><strong>Recompensa total:</strong> {{ crew.total_prime }}</p>
+        @if (crew.is_yonko === 'true') {
+          <span class="badge bg-danger">YONKO</span>
+        }
+      </div>
+    </div>
+
+    <h4 class="mb-3">Miembros ({{ members.length }})</h4>
+    @if (members.length === 0) {
+      <p>No hay miembros registrados en esta tripulación.</p>
+    } @else {
+      <ul class="list-group">
+        @for (m of members; track m.id) {
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <strong
+                class="text-primary"
+                style="cursor:pointer"
+                (click)="goToMember(m)"
+                >{{ m.name }}</strong
+              ><br />
+              <small>Rol: {{ m.job }}</small>
+            </div>
+            @if (m.bounty) {
+              <span class="badge bg-success rounded-pill">{{
+                m.bounty
+              }}</span>
+            }
+          </li>
+        }
+      </ul>
+    }
+  } @else if (!loading && !crew) {
+    <div class="alert alert-danger mt-3">No se encontró la tripulación.</div>
+  }
+</div>

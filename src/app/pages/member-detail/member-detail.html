@@ -1,0 +1,34 @@
+<div class="container my-4">
+  <button class="btn btn-link mb-3" (click)="goBack()">← Volver</button>
+
+  @if (loading) {
+    <div class="alert alert-info">Cargando...</div>
+  }
+
+  @if (!loading && member) {
+    <div class="card shadow-sm">
+      <div class="row g-0">
+        <div class="col-md-4 text-center p-3">
+          @if (member.fruit?.filename) {
+            <img [src]="member.fruit?.filename" class="img-fluid rounded" alt="{{ member.name }}">
+          }
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h3 class="card-title text-primary">{{ member.name }}</h3>
+            <p class="card-text"><strong>Rol:</strong> {{ member.job }}</p>
+            <p class="card-text"><strong>Edad:</strong> {{ member.age }}</p>
+            <p class="card-text"><strong>Estado:</strong> {{ member.status }}</p>
+            <p class="card-text"><strong>Tripulación:</strong> {{ member.crew?.name ?? '—' }}</p>
+            <p class="card-text"><strong>Fruta del diablo:</strong> {{ member.fruit?.name ?? 'No tiene' }}</p>
+            @if (member.bounty) {
+              <p class="card-text text-success"><strong>Recompensa:</strong> {{ member.bounty }}</p>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else if (!loading && !member) {
+    <div class="alert alert-danger mt-3">No se encontró el miembro.</div>
+  }
+</div>

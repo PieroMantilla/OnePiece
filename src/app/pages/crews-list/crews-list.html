@@ -1,0 +1,35 @@
+<div class="container my-4">
+  <h2 class="mb-3 text-primary">Tripulaciones</h2>
+
+  <form class="d-flex mb-3" (ngSubmit)="onSearch()">
+    <input [(ngModel)]="searchName" name="search" class="form-control me-2" placeholder="Buscar por nombre...">
+    <button class="btn btn-primary me-2" type="submit">Buscar</button>
+    <button class="btn btn-secondary" type="button" (click)="clearSearch()">Limpiar</button>
+  </form>
+
+  @if (loading) {
+    <div class="alert alert-info">Cargando...</div>
+  }
+
+  @if (!loading && crews.length === 0) {
+    <div class="alert alert-warning">No se encontraron tripulaciones.</div>
+  }
+
+  <div class="row">
+    @for (c of crews; track c.id) {
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a [routerLink]="['/crewdetail', c.id]" class="text-decoration-none">{{ c.name }}</a>
+            </h5>
+            <p class="card-text"><strong>Estado:</strong> {{ c.status }}</p>
+            <p class="card-text"><strong>Miembros:</strong> {{ c.number }}</p>
+            <p class="card-text"><strong>Total Bounty:</strong> {{ c.total_prime }}</p>
+            <p class="card-text"><strong>Yonko:</strong> {{ c.is_yonko === 'true' ? 'Sí' : 'No' }}</p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

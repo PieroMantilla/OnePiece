@@ -1,0 +1,27 @@
+.header {
+  background: linear-gradient(90deg, #00c3ff, #0377a5);
+  
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 230px;
+  height: 120px;
+  object-fit: contain;  
+}
+.name {
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  margin-left: 10px;
+  font-weight: bold; 
+  text-align:left;
+  font-family: 'Arial', sans-serif;
+} 
+
+
